@@ -57,6 +57,7 @@ nav .navcta{background:var(--pd);color:#fff;text-decoration:none;border-radius:9
 .heroimg{border-radius:24px;overflow:hidden;box-shadow:0 24px 50px -20px rgba(0,0,0,.35);aspect-ratio:4/3}
 .heroimg img{width:100%;height:100%;object-fit:cover}
 section{padding:46px 0}
+[id]{scroll-margin-top:72px}
 .sub{color:var(--mut);max-width:40em;margin:-4px 0 22px}
 .tool{background:var(--pd);color:#fff}
 .tool .sub{color:rgba(255,255,255,.85)}
@@ -117,7 +118,7 @@ footer .wrap{display:grid;gap:18px}
 footer small{color:#a9b0a7}
 .fab{position:fixed;left:16px;bottom:16px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:transform .25s,opacity .25s;border-radius:999px;background:var(--pd);color:#fff;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 20px}
 .fab.off{transform:translateY(130%);opacity:0;pointer-events:none;visibility:hidden}
-.mbar{position:fixed;left:12px;right:12px;bottom:76px;z-index:70;background:#fff;color:#111;border:2px solid #111;border-radius:16px;padding:10px 10px 10px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 30px rgba(0,0,0,.3);transition:transform .25s,opacity .25s}
+.mbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:70;background:#fff;color:#111;border:2px solid #111;border-radius:16px;padding:10px 10px 10px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 30px rgba(0,0,0,.3);transition:transform .25s,opacity .25s}
 .mbar.hide{transform:translateY(200%);opacity:0;pointer-events:none;visibility:hidden}
 .mbar b{font-size:15px;display:block;line-height:1.2}
 .mbar a{margin-left:auto;background:var(--pd);color:#fff;border-radius:12px;padding:10px 14px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap}
@@ -231,8 +232,9 @@ let L='ms';
 const q=s=>document.querySelector(s);
 const T=(m,e)=>L==='en'?e:m;
 const cnt={};
-const ico='<svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 2h6v3l2 2v13a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V7l2-2z" opacity=".9"/></svg>';
-q('#boxes').innerHTML=C.box.map(b=>{cnt[b.id]=0;return '<div class="box">'+ico+'<div class="bt"><b data-en="'+b.en+'">'+b.ms+'</b><small data-en="'+b.sen+'">'+b.sms+'</small></div><div class="step"><button type="button" data-b="'+b.id+'" data-d="-1" aria-label="Kurang '+b.ms+'" data-en-al="Fewer '+b.en+'">&minus;</button><output id="c-'+b.id+'" aria-live="polite">0</output><button type="button" data-b="'+b.id+'" data-d="1" aria-label="Tambah '+b.ms+'" data-en-al="More '+b.en+'">+</button></div></div>'}).join('');
+const IC={b1:'<path d="M10.5 6h3v2l1.5 2v9a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-9l1.5-2z"/><rect x="10.5" y="4" width="3" height="1.6" rx=".4"/>',b5:'<path d="M9 5h6v2.5l2.5 2.5v10a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V10L9 7.5z"/><rect x="9.5" y="2.6" width="5" height="1.8" rx=".5"/>',t17:'<rect x="5" y="6" width="14" height="16" rx="1.5"/><path d="M8 6V3.5h8V6h-1.6V5h-4.8v1z"/>',j20:'<path d="M4 8a2 2 0 0 1 2-2h4l2-3h5a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><rect x="13" y="5.2" width="4" height="1.6" rx=".6" fill="#1b1b1b" opacity=".35"/>'};
+const ico=id=>'<svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--a)">'+(IC[id]||IC.b5)+'</svg>';
+q('#boxes').innerHTML=C.box.map(b=>{cnt[b.id]=0;return '<div class="box">'+ico(b.id)+'<div class="bt"><b data-en="'+b.en+'">'+b.ms+'</b><small data-en="'+b.sen+'">'+b.sms+'</small></div><div class="step"><button type="button" data-b="'+b.id+'" data-d="-1" aria-label="Kurang '+b.ms+'" data-en-al="Fewer '+b.en+'">&minus;</button><output id="c-'+b.id+'" aria-live="polite">0</output><button type="button" data-b="'+b.id+'" data-d="1" aria-label="Tambah '+b.ms+'" data-en-al="More '+b.en+'">+</button></div></div>'}).join('');
 const els=[...document.querySelectorAll('[data-en]')];els.forEach(e=>e.dataset.ms=e.innerHTML);
 const alts=[...document.querySelectorAll('[data-en-alt]')];alts.forEach(e=>e.dataset.msAlt=e.alt);
 const als=[...document.querySelectorAll('[data-en-al]')];als.forEach(e=>e.dataset.msAl=e.getAttribute('aria-label'));
